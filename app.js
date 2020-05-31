@@ -5,6 +5,7 @@ const express = require('express')
 const app = express()
 const port = 3000
 
+// middleware function
 var middleware = function (req, res, next) {
   req.reqDate = new Intl.DateTimeFormat().format()
   req.reqTime = new Date()
@@ -12,20 +13,21 @@ var middleware = function (req, res, next) {
   console.log(req.reqDate, req.reqLocalTime, '|', req.method, 'path from', req.url)
   next()
 }
+app.use(middleware)
 
 // app.js
-app.get('/', middleware, (req, res) => {
+app.get('/', (req, res) => {
   res.send('列出全部 Todo')
 })
 
-app.get('/new', middleware, (req, res) => {
+app.get('/new', (req, res) => {
   res.send('新增 Todo 頁面')
 })
-app.get('/:id', middleware, (req, res) => {
+app.get('/:id', (req, res) => {
   res.send('顯示一筆 Todo')
 })
 
-app.post('/', middleware, (req, res) => {
+app.post('/', (req, res) => {
   res.send('新增一筆  Todo')
 })
 
