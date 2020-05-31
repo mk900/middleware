@@ -7,12 +7,13 @@ const port = 3000
 
 // middleware function
 var middleware = function (req, res, next) {
-  req.reqDate = new Intl.DateTimeFormat().format()
-  req.reqTime = new Date()
-  req.reqLocalTime = req.reqTime.toLocaleTimeString()
-  console.log(req.reqDate, req.reqLocalTime, '|', req.method, 'path from', req.url)
+  startDate = new Intl.DateTimeFormat().format()
+  startTime = new Date()
+  startLocalTime = startTime.toLocaleTimeString()
+  console.log(startDate, startLocalTime, '|', req.method, 'path from', req.url)
   next()
 }
+
 app.use(middleware)
 
 // app.js
